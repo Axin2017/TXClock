@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GlobalClockEdit_grv = new System.Windows.Forms.DataGridView();
             this.GlobalClockAdd_btn = new System.Windows.Forms.Button();
             this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +42,14 @@
             // 
             this.GlobalClockEdit_grv.AllowUserToAddRows = false;
             this.GlobalClockEdit_grv.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GlobalClockEdit_grv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.GlobalClockEdit_grv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GlobalClockEdit_grv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tag,
@@ -47,6 +57,7 @@
             this.delele});
             this.GlobalClockEdit_grv.Location = new System.Drawing.Point(12, 12);
             this.GlobalClockEdit_grv.Name = "GlobalClockEdit_grv";
+            this.GlobalClockEdit_grv.ReadOnly = true;
             this.GlobalClockEdit_grv.RowHeadersVisible = false;
             this.GlobalClockEdit_grv.RowTemplate.Height = 23;
             this.GlobalClockEdit_grv.Size = new System.Drawing.Size(303, 269);
@@ -65,6 +76,8 @@
             // 
             // tag
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.tag.DefaultCellStyle = dataGridViewCellStyle2;
             this.tag.HeaderText = "标签";
             this.tag.Name = "tag";
             this.tag.ReadOnly = true;
@@ -73,13 +86,14 @@
             // 
             this.edit.HeaderText = "编辑";
             this.edit.Name = "edit";
+            this.edit.ReadOnly = true;
             this.edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // delele
             // 
             this.delele.HeaderText = "删除";
             this.delele.Name = "delele";
+            this.delele.ReadOnly = true;
             // 
             // GlobalClockEditForm
             // 

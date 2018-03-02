@@ -57,7 +57,7 @@ namespace TXClock
         private void GlobalClockAdd_grv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            if (e.ColumnIndex==2)
+            if (e.ColumnIndex==2 && rowIndex != -1)
             {
                 GlobalClockAdd_grv.Rows.RemoveAt(rowIndex);
             }

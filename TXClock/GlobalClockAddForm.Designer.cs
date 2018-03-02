@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GlobalClockAddAdd_btn = new System.Windows.Forms.Button();
             this.GlobalClockAddSave_btn = new System.Windows.Forms.Button();
             this.GlobalClockAdd_grv = new System.Windows.Forms.DataGridView();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.GlobalClockAddTag_txt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,6 +49,9 @@
             this.GlobalClockAddAdd_cb1 = new System.Windows.Forms.CheckBox();
             this.GlobalClockAddAdd_cb0 = new System.Windows.Forms.CheckBox();
             this.GlobalClockAddAdd_rb3 = new System.Windows.Forms.RadioButton();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalClockAdd_grv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +79,14 @@
             // GlobalClockAdd_grv
             // 
             this.GlobalClockAdd_grv.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GlobalClockAdd_grv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.GlobalClockAdd_grv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GlobalClockAdd_grv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.time,
@@ -88,25 +100,6 @@
             this.GlobalClockAdd_grv.Size = new System.Drawing.Size(293, 170);
             this.GlobalClockAdd_grv.TabIndex = 9;
             this.GlobalClockAdd_grv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GlobalClockAdd_grv_CellClick);
-            // 
-            // time
-            // 
-            this.time.HeaderText = "时间";
-            this.time.Name = "time";
-            this.time.ReadOnly = true;
-            // 
-            // tag
-            // 
-            this.tag.HeaderText = "提示信息";
-            this.tag.Name = "tag";
-            this.tag.ReadOnly = true;
-            // 
-            // delete
-            // 
-            this.delete.HeaderText = "删除";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Width = 90;
             // 
             // label2
             // 
@@ -136,12 +129,10 @@
             // GlobalClockAddAdd_rb1
             // 
             this.GlobalClockAddAdd_rb1.AutoSize = true;
-            this.GlobalClockAddAdd_rb1.Checked = true;
-            this.GlobalClockAddAdd_rb1.Location = new System.Drawing.Point(55, 287);
+            this.GlobalClockAddAdd_rb1.Location = new System.Drawing.Point(210, 287);
             this.GlobalClockAddAdd_rb1.Name = "GlobalClockAddAdd_rb1";
             this.GlobalClockAddAdd_rb1.Size = new System.Drawing.Size(47, 16);
             this.GlobalClockAddAdd_rb1.TabIndex = 12;
-            this.GlobalClockAddAdd_rb1.TabStop = true;
             this.GlobalClockAddAdd_rb1.Text = "每天";
             this.GlobalClockAddAdd_rb1.UseVisualStyleBackColor = true;
             this.GlobalClockAddAdd_rb1.CheckedChanged += new System.EventHandler(this.GlobalClockAddAdd_rb1_CheckedChanged);
@@ -149,7 +140,7 @@
             // GlobalClockAddAdd_rb2
             // 
             this.GlobalClockAddAdd_rb2.AutoSize = true;
-            this.GlobalClockAddAdd_rb2.Location = new System.Drawing.Point(138, 287);
+            this.GlobalClockAddAdd_rb2.Location = new System.Drawing.Point(136, 287);
             this.GlobalClockAddAdd_rb2.Name = "GlobalClockAddAdd_rb2";
             this.GlobalClockAddAdd_rb2.Size = new System.Drawing.Size(59, 16);
             this.GlobalClockAddAdd_rb2.TabIndex = 13;
@@ -175,7 +166,6 @@
             // GlobalClockAddAdd_cb6
             // 
             this.GlobalClockAddAdd_cb6.AutoSize = true;
-            this.GlobalClockAddAdd_cb6.Enabled = false;
             this.GlobalClockAddAdd_cb6.Location = new System.Drawing.Point(233, 21);
             this.GlobalClockAddAdd_cb6.Name = "GlobalClockAddAdd_cb6";
             this.GlobalClockAddAdd_cb6.Size = new System.Drawing.Size(36, 16);
@@ -186,7 +176,6 @@
             // GlobalClockAddAdd_cb5
             // 
             this.GlobalClockAddAdd_cb5.AutoSize = true;
-            this.GlobalClockAddAdd_cb5.Enabled = false;
             this.GlobalClockAddAdd_cb5.Location = new System.Drawing.Point(196, 21);
             this.GlobalClockAddAdd_cb5.Name = "GlobalClockAddAdd_cb5";
             this.GlobalClockAddAdd_cb5.Size = new System.Drawing.Size(36, 16);
@@ -197,7 +186,6 @@
             // GlobalClockAddAdd_cb4
             // 
             this.GlobalClockAddAdd_cb4.AutoSize = true;
-            this.GlobalClockAddAdd_cb4.Enabled = false;
             this.GlobalClockAddAdd_cb4.Location = new System.Drawing.Point(159, 21);
             this.GlobalClockAddAdd_cb4.Name = "GlobalClockAddAdd_cb4";
             this.GlobalClockAddAdd_cb4.Size = new System.Drawing.Size(36, 16);
@@ -208,7 +196,6 @@
             // GlobalClockAddAdd_cb3
             // 
             this.GlobalClockAddAdd_cb3.AutoSize = true;
-            this.GlobalClockAddAdd_cb3.Enabled = false;
             this.GlobalClockAddAdd_cb3.Location = new System.Drawing.Point(122, 21);
             this.GlobalClockAddAdd_cb3.Name = "GlobalClockAddAdd_cb3";
             this.GlobalClockAddAdd_cb3.Size = new System.Drawing.Size(36, 16);
@@ -219,7 +206,6 @@
             // GlobalClockAddAdd_cb2
             // 
             this.GlobalClockAddAdd_cb2.AutoSize = true;
-            this.GlobalClockAddAdd_cb2.Enabled = false;
             this.GlobalClockAddAdd_cb2.Location = new System.Drawing.Point(85, 21);
             this.GlobalClockAddAdd_cb2.Name = "GlobalClockAddAdd_cb2";
             this.GlobalClockAddAdd_cb2.Size = new System.Drawing.Size(36, 16);
@@ -230,7 +216,6 @@
             // GlobalClockAddAdd_cb1
             // 
             this.GlobalClockAddAdd_cb1.AutoSize = true;
-            this.GlobalClockAddAdd_cb1.Enabled = false;
             this.GlobalClockAddAdd_cb1.Location = new System.Drawing.Point(48, 21);
             this.GlobalClockAddAdd_cb1.Name = "GlobalClockAddAdd_cb1";
             this.GlobalClockAddAdd_cb1.Size = new System.Drawing.Size(36, 16);
@@ -241,7 +226,6 @@
             // GlobalClockAddAdd_cb0
             // 
             this.GlobalClockAddAdd_cb0.AutoSize = true;
-            this.GlobalClockAddAdd_cb0.Enabled = false;
             this.GlobalClockAddAdd_cb0.Location = new System.Drawing.Point(11, 21);
             this.GlobalClockAddAdd_cb0.Name = "GlobalClockAddAdd_cb0";
             this.GlobalClockAddAdd_cb0.Size = new System.Drawing.Size(36, 16);
@@ -252,12 +236,40 @@
             // GlobalClockAddAdd_rb3
             // 
             this.GlobalClockAddAdd_rb3.AutoSize = true;
-            this.GlobalClockAddAdd_rb3.Location = new System.Drawing.Point(233, 287);
+            this.GlobalClockAddAdd_rb3.Checked = true;
+            this.GlobalClockAddAdd_rb3.Location = new System.Drawing.Point(62, 287);
             this.GlobalClockAddAdd_rb3.Name = "GlobalClockAddAdd_rb3";
             this.GlobalClockAddAdd_rb3.Size = new System.Drawing.Size(59, 16);
             this.GlobalClockAddAdd_rb3.TabIndex = 15;
+            this.GlobalClockAddAdd_rb3.TabStop = true;
             this.GlobalClockAddAdd_rb3.Text = "一次性";
             this.GlobalClockAddAdd_rb3.UseVisualStyleBackColor = true;
+            // 
+            // time
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.time.DefaultCellStyle = dataGridViewCellStyle2;
+            this.time.HeaderText = "时间";
+            this.time.Name = "time";
+            this.time.ReadOnly = true;
+            // 
+            // tag
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.tag.DefaultCellStyle = dataGridViewCellStyle3;
+            this.tag.HeaderText = "提示信息";
+            this.tag.Name = "tag";
+            this.tag.ReadOnly = true;
+            // 
+            // delete
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.delete.DefaultCellStyle = dataGridViewCellStyle4;
+            this.delete.HeaderText = "删除";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.delete.Width = 90;
             // 
             // GlobalClockAddForm
             // 

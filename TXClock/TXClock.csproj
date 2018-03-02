@@ -107,6 +107,7 @@
     <Compile Include="Interface\IClockForm.cs" />
     <Compile Include="Interface\ITimeService.cs" />
     <Compile Include="Interface\IXmlConvert.cs" />
+    <Compile Include="Model\CountClock.cs" />
     <Compile Include="Model\GlobalClock.cs" />
     <Compile Include="Model\GlobalClockTime.cs" />
     <Compile Include="Model\MyClockForm.cs">
@@ -127,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CountClockAddForm.resx">
       <DependentUpon>CountClockAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CountClockEditForm.resx">
+      <DependentUpon>CountClockEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogTip.resx">
       <DependentUpon>DialogTip.cs</DependentUpon>
@@ -164,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ConfigXml\Config.xml" />
+    <Content Include="ConfigXml\CountClock.xml" />
     <Content Include="ConfigXml\GlobalClock.xml" />
   </ItemGroup>
   <ItemGroup />

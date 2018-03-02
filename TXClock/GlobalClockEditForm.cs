@@ -56,14 +56,13 @@ namespace TXClock
         private void GlobalClockEdit_grv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            string tag = GlobalClockEdit_grv.Rows[rowIndex].Cells["tag"].Value.ToString();
-            if (e.ColumnIndex == 1)//edit
+            if (e.ColumnIndex == 1 && rowIndex != -1)//edit
             {
-                EditClock(tag);
+                EditClock(GlobalClockEdit_grv.Rows[rowIndex].Cells["tag"].Value.ToString());
             }
-            else if (e.ColumnIndex == 2)//delete
+            else if (e.ColumnIndex == 2 && rowIndex != -1)//delete
             {
-                DeleteClock(tag);
+                DeleteClock(GlobalClockEdit_grv.Rows[rowIndex].Cells["tag"].Value.ToString());
             }
         }
 

@@ -12,7 +12,6 @@ namespace TXClock.Model
 {
     public class GlobalClock:IXmlConvert
     {
-        private ITimeService TimeService;
         public string Tag { get; set; }
         private List<GlobalClockTime> timeList;
         public List<GlobalClockTime> TimeList
@@ -45,10 +44,7 @@ namespace TXClock.Model
         }
         public GlobalClockType ClockType { get; set; }
 
-        public GlobalClock()
-        {
-            TimeService = new TimeService();
-        }
+        
 
         public void DeleteFromXmlNode(XmlDocument doc)
         {

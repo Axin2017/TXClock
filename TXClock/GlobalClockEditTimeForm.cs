@@ -73,7 +73,7 @@ namespace TXClock
         private void GlobalClockEdit_grv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 2 && rowIndex!=-1)
             {
                 globalClock.TimeList.RemoveAt(rowIndex);
                 GlobalClockEdit_grv.Rows.RemoveAt(rowIndex);
@@ -125,7 +125,7 @@ namespace TXClock
                         newClock.WeekList.Add((WeekType)Enum.ToObject(typeof(WeekType), i));
                     }
                 }
-                if (globalClock.WeekList.Count == 0 && globalClock.ClockType == GlobalClockType.custom)
+                if (newClock.WeekList.Count == 0 && newClock.ClockType == GlobalClockType.custom)
                 {
                     MessageBox.Show("自定义模式必须选择星期!");
                     return;

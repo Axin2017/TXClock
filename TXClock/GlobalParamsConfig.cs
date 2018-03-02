@@ -14,6 +14,13 @@ namespace TXClock
                 return AppDomain.CurrentDomain.BaseDirectory + @"..\..\ConfigXml\GlobalClock.xml";
             }
         }
+        public static string CountClockXmlPath
+        {
+            get
+            {
+                return AppDomain.CurrentDomain.BaseDirectory + @"..\..\ConfigXml\CountClock.xml";
+            }
+        }
         public static string ConfigXmlPath
         {
             get

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TXClock.Model;
+using TXClock.Service;
 
 namespace TXClock
 {
@@ -23,7 +24,7 @@ namespace TXClock
         private void AddClockSave_btn_Click(object sender, EventArgs e)
         {
             string time = AddClockTime_txt.Text;
-            if (!time.Contains(":") || time.Split(':').Length!=2)
+            if (!TimeService.IsGlobalClockTime(time))
             {
                 MessageBox.Show("时间格式不正确，例子： 05:20表示上午五点二十");
             }else

@@ -8,9 +8,9 @@ using TXClock.Interface;
 
 namespace TXClock.Service
 {
-    public class TimeService : ITimeService
+    public class TimeService
     {
-        public bool IsTime(string time)
+        public static bool IsGlobalClockTime(string time)
         {
             try
             {
@@ -32,7 +32,42 @@ namespace TXClock.Service
                 return false;
             }
         }
-        public TimeSpan GetLeftTime(string time, GlobalClockType clockType, List<WeekType> weekTypeList)
+        public static bool IsCountClockTime(string time)
+        {
+            try
+            {
+                if (!time.Contains(":"))
+                {
+                    return false;
+                }
+                int[] timeLimitArray = new int[] { 10000,59, 59 };
+                string[] timeArray = time.Split(':');
+                if (timeArray.Length>3)//目前只精确到时分秒
+                {
+                    return false;
+                }
+                for (int i=0;i<timeArray.Length;i++)
+                {
+                    int m = 0;
+                    if (int.TryParse(timeArray[i], out m)==false)
+                    {
+                        return false;
+                    }else
+                    {
+                        if (m>timeLimitArray[i])
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static TimeSpan GetLeftTime(string time, GlobalClockType clockType, List<WeekType> weekTypeList)
         {
             DateTime now = GlobalParamsConfig.Now;
             TimeSpan timeSpan = TimeSpan.Parse(time);

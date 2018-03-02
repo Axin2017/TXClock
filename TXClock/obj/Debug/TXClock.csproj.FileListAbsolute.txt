@@ -1,4 +1,3 @@
-D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.csprojResolveAssemblyReference.cache
 D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.Clock.resources
 D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.Properties.Resources.resources
 D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.csproj.GenerateResource.Cache
@@ -17,3 +16,4 @@ D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.GlobalClockEditForm.
 D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.GlobalClockEditTimeForm.resources
 D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.BaseSettingForm.resources
 D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.DialogTip.resources
+D:\vsproject\我的项目\TXClock\TXClock\obj\Debug\TXClock.CountClockEditForm.resources

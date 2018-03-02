@@ -17,21 +17,30 @@ namespace TXClock
 {
     public partial class Clock : TXTrayForm
     {
+        #region 闹钟属性
         int count=1;
-        private ITimeService timeService;
         private XmlDocument globleDoc;
         private List<GlobalClockTime> globalClockTimeList;
+        #endregion
+        #region 倒计时属性
+        private XmlDocument countDoc;
+        private List<CountClock> countClockList;
+        #endregion
         public Clock()
         {
             InitializeComponent();
+
             GlobalParamsConfig.Now = DateTime.Now;
-            timeService = new TimeService();
+            #region 闹钟初始化
             globalClockTimeList = new List<GlobalClockTime>();
             SetTrayInfoAndIcon();
             CheckConfigXml();
             LoadGlobalClock();
             SetTime();
             timer1.Start();
+            #endregion
+            countClockList = new List<CountClock>();
+            LoadCountClock();
         }
         private void SetTime()
         {
@@ -51,7 +60,7 @@ namespace TXClock
         }
 
         #region 加载闹钟
-        public void LoadGlobalClock()
+        private void LoadGlobalClock()
         {
             XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
             this.globleDoc = globalXml;
@@ -182,13 +191,22 @@ namespace TXClock
                 Config.AppendChild(IsStart);
                 xmldoc.Save(GlobalParamsConfig.ConfigXmlPath);
             }
+            if (!File.Exists(GlobalParamsConfig.CountClockXmlPath))
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                XmlDeclaration xmldecl = xmldoc.CreateXmlDeclaration("1.0", "utf-8", null);
+                xmldoc.AppendChild(xmldecl);
+                XmlElement CountClock = xmldoc.CreateElement("CountClock");
+                xmldoc.AppendChild(CountClock);
+                xmldoc.Save(GlobalParamsConfig.CountClockXmlPath);
+            }
         }
         //启用或者禁用
         private void ClockGlobalGrd_grd_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (ClockGlobalGrd_grd.Columns[e.ColumnIndex].Name == "enable")
+            int rowIndex = e.RowIndex;
+            if (ClockGlobalGrd_grd.Columns[e.ColumnIndex].Name == "enable" && rowIndex!=-1)
             {
-                int rowIndex = e.RowIndex;
                 GlobalClockTime gct = new GlobalClockTime();
                 gct.ParantTag = ClockGlobalGrd_grd.Rows[rowIndex].Cells["tag"].Value.ToString();
                 gct.Time = ClockGlobalGrd_grd.Rows[rowIndex].Cells["time"].Value.ToString();
@@ -214,6 +232,7 @@ namespace TXClock
         
         private void UpdateTimeInGrid()
         {
+            #region 闹钟
             //每分钟刷新一次，防止有误差
             bool refresh = count%60==0;
             foreach (DataGridViewRow row in ClockGlobalGrd_grd.Rows)
@@ -237,7 +256,7 @@ namespace TXClock
                     }
                     else
                     {
-                        TimeSpan newTimeSpan = timeService.GetLeftTime(time, nowGct.ClockType, nowGct.WeekList);
+                        TimeSpan newTimeSpan = TimeService.GetLeftTime(time, nowGct.ClockType, nowGct.WeekList);
                         row.Cells["leftTime"].Value = newTimeSpan.ToString();
                         if (newTimeSpan <= TimeSpan.Parse("00:00:01"))
                         {
@@ -251,6 +270,26 @@ namespace TXClock
             {
                 ReLoadGlobalClock();
             }
+            #endregion
+            #region 倒计时
+            foreach (DataGridViewRow row in grv_countingClock.Rows)
+            {
+                string time = row.Cells["cell_leftTime"].Value.ToString();
+                string[] timeArray = time.Split(':');
+                for (int i= timeArray.Length-1;i>=0;i--)
+                {
+                    int number = int.Parse(timeArray[i]);
+                    if (number==0)
+                    {
+
+                    }else
+                    {
+                        timeArray[i] = (number - 1).ToString();
+                    }
+                }
+                row.Cells["cell_leftTime"].Value = "";
+            }
+            #endregion
         }
         //触发闹钟
         private void GlobalClockRun(DataGridViewRow row)
@@ -279,8 +318,13 @@ namespace TXClock
                 dt.ShowDialog();
             }
         }
+        
+        private void CountClockRun(DataGridViewRow row)
+        {
 
-       
+        }
+
+
         private void btn_addGlobalClock_Click(object sender, EventArgs e)
         {
             GlobalClockAddForm addForm = new GlobalClockAddForm(this);
@@ -297,6 +341,104 @@ namespace TXClock
         {
             BaseSettingForm settingForm = new BaseSettingForm();
             settingForm.ShowDialog();
+        }
+
+        private void btn_addCountClock_Click(object sender, EventArgs e)
+        {
+            CountClockAddForm countAddForm = new CountClockAddForm(this);
+            countAddForm.ShowDialog();
+        }
+
+        private void LoadCountClock()
+        {
+            XmlDocument countXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath);
+            this.countDoc = countXml;
+            XmlNodeList clockNodeList = countXml.GetElementsByTagName("Clock");
+            foreach (XmlNode clockNode in clockNodeList)
+            {
+                CountClock countClock = new CountClock();
+                countClock.InitFromXmlNode(clockNode);
+                countClockList.Add(countClock);
+            }
+            InitCountClockGrid(countClockList);
+        }
+        private void InitCountClockGrid(List<CountClock> countClockList)
+        {
+            foreach (CountClock cc in countClockList)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                DataGridViewTextBoxCell tag = new DataGridViewTextBoxCell();
+                tag.Value = cc.Tag;
+                row.Cells.Add(tag);
+                DataGridViewTextBoxCell time = new DataGridViewTextBoxCell();
+                time.Value = cc.Time;
+                row.Cells.Add(time);
+                DataGridViewTextBoxCell note = new DataGridViewTextBoxCell();
+                note.Value = cc.Note;
+                row.Cells.Add(note);
+                DataGridViewButtonCell startCount = new DataGridViewButtonCell();
+                startCount.Value = "计时";
+                row.Cells.Add(startCount);
+                grv_countClock.Rows.Add(row);
+            }
+        }
+        public void ReloadCountClockGrid()
+        {
+            grv_countClock.Rows.Clear();
+            countClockList.Clear();
+            LoadCountClock();
+        }
+
+        private void btn_editCountClock_Click(object sender, EventArgs e)
+        {
+            CountClockEditForm countEditForm = new CountClockEditForm(this);
+            countEditForm.ShowDialog();
+        }
+
+        private void grv_countClock_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex!=-1 && grv_countClock.Columns[e.ColumnIndex].Name == "cell_startCount")
+            {
+                string tagStr = grv_countClock.Rows[rowIndex].Cells["cell_tag"].Value.ToString();
+                string leftTimeStr = grv_countClock.Rows[rowIndex].Cells["cell_allTime"].Value.ToString();
+                DataGridViewRow row = new DataGridViewRow();
+                DataGridViewTextBoxCell tag = new DataGridViewTextBoxCell();
+                tag.Value = tagStr;
+                row.Cells.Add(tag);
+                DataGridViewTextBoxCell time = new DataGridViewTextBoxCell();
+                time.Value = leftTimeStr;
+                row.Cells.Add(time);
+                DataGridViewTextBoxCell enable = new DataGridViewTextBoxCell();
+                enable.Value = "是";
+                row.Cells.Add(enable);
+                DataGridViewButtonCell delete = new DataGridViewButtonCell();
+                delete.Value = "删除";
+                row.Cells.Add(delete);
+                grv_countingClock.Rows.Add(row);
+            }
+        }
+
+        private void grv_countingClock_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex != -1 && grv_countingClock.Columns[e.ColumnIndex].Name == "cell_enable")
+            {
+                if (grv_countingClock.Rows[rowIndex].Cells["cell_enable"].Value.ToString()=="是")
+                {
+                    grv_countingClock.Rows[rowIndex].Cells["cell_enable"].Value = "否";
+                    grv_countingClock.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    grv_countingClock.Rows[rowIndex].Cells["cell_enable"].Value = "是";
+                    grv_countingClock.Rows[rowIndex].DefaultCellStyle.BackColor = Color.White;
+                }
+            }
+            else if (rowIndex != -1 && grv_countingClock.Columns[e.ColumnIndex].Name == "cell_delete")
+            {
+                grv_countingClock.Rows.RemoveAt(rowIndex);
+            }
         }
     }
 }

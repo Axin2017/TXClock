@@ -10,6 +10,7 @@ namespace TXClock.Interface
     public interface IXmlConvert
     {
         void SaveToXmlNode(XmlDocument  doc);
+        void DeleteFromXmlNode(XmlDocument doc);
         void InitFromXmlNode(XmlNode node);
     }
 }
