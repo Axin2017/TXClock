@@ -42,7 +42,7 @@ namespace TXClock.Service
                 }
                 int[] timeLimitArray = new int[] { 10000,59, 59 };
                 string[] timeArray = time.Split(':');
-                if (timeArray.Length>3)//目前只精确到时分秒
+                if (timeArray.Length!=3)//目前只精确到时分秒
                 {
                     return false;
                 }
@@ -54,7 +54,7 @@ namespace TXClock.Service
                         return false;
                     }else
                     {
-                        if (m>timeLimitArray[i])
+                        if (m>timeLimitArray[i] || m<0)
                         {
                             return false;
                         }

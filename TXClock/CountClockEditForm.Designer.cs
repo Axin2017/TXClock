@@ -101,6 +101,7 @@
             this.cell_allTime.DefaultCellStyle = dataGridViewCellStyle3;
             this.cell_allTime.HeaderText = "时长";
             this.cell_allTime.Name = "cell_allTime";
+            this.cell_allTime.ReadOnly = true;
             this.cell_allTime.Width = 70;
             // 
             // cell_note

@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>clock.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,12 +57,6 @@
     <Compile Include="AddClockForm.Designer.cs">
       <DependentUpon>AddClockForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BaseSettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BaseSettingForm.Designer.cs">
-      <DependentUpon>BaseSettingForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Clock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +74,12 @@
     </Compile>
     <Compile Include="CountClockEditForm.Designer.cs">
       <DependentUpon>CountClockEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CountClockEditTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CountClockEditTimeForm.Designer.cs">
+      <DependentUpon>CountClockEditTimeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DialogTip.cs">
       <SubType>Form</SubType>
@@ -104,6 +107,12 @@
     <Compile Include="GlobalClockEditTimeForm.Designer.cs">
       <DependentUpon>GlobalClockEditTimeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalClockEditTimeInRowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlobalClockEditTimeInRowForm.Designer.cs">
+      <DependentUpon>GlobalClockEditTimeInRowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface\IClockForm.cs" />
     <Compile Include="Interface\ITimeService.cs" />
     <Compile Include="Interface\IXmlConvert.cs" />
@@ -120,9 +129,6 @@
     <EmbeddedResource Include="AddClockForm.resx">
       <DependentUpon>AddClockForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BaseSettingForm.resx">
-      <DependentUpon>BaseSettingForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Clock.resx">
       <DependentUpon>Clock.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CountClockEditForm.resx">
       <DependentUpon>CountClockEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CountClockEditTimeForm.resx">
+      <DependentUpon>CountClockEditTimeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogTip.resx">
       <DependentUpon>DialogTip.cs</DependentUpon>
@@ -143,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GlobalClockEditTimeForm.resx">
       <DependentUpon>GlobalClockEditTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalClockEditTimeInRowForm.resx">
+      <DependentUpon>GlobalClockEditTimeInRowForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -167,6 +179,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="clock.ico" />
     <Content Include="ConfigXml\Config.xml" />
     <Content Include="ConfigXml\CountClock.xml" />
     <Content Include="ConfigXml\GlobalClock.xml" />

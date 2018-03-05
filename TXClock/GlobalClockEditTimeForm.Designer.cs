@@ -227,7 +227,6 @@
             this.delete});
             this.GlobalClockEdit_grv.Location = new System.Drawing.Point(21, 94);
             this.GlobalClockEdit_grv.Name = "GlobalClockEdit_grv";
-            this.GlobalClockEdit_grv.ReadOnly = true;
             this.GlobalClockEdit_grv.RowHeadersVisible = false;
             this.GlobalClockEdit_grv.RowTemplate.Height = 23;
             this.GlobalClockEdit_grv.Size = new System.Drawing.Size(293, 170);
@@ -258,7 +257,6 @@
             this.tag.DefaultCellStyle = dataGridViewCellStyle3;
             this.tag.HeaderText = "提示信息";
             this.tag.Name = "tag";
-            this.tag.ReadOnly = true;
             this.tag.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // delete
@@ -267,7 +265,6 @@
             this.delete.DefaultCellStyle = dataGridViewCellStyle4;
             this.delete.HeaderText = "删除";
             this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.delete.Width = 90;
             // 

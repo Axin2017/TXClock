@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GlobalClock>
+  <Clock tag="1" type="2">
+    <Times>
+      <Time tag="1" enable="1">21:0</Time>
+    </Times>
+    <Weeks />
+  </Clock>
+  <Clock tag="11" type="2">
+    <Times>
+      <Time tag="s" enable="0">7:0</Time>
+    </Times>
+    <Weeks />
+  </Clock>
+</GlobalClock>

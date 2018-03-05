@@ -19,31 +19,42 @@ namespace TXClock
         {
             InitializeComponent();
             this.pForm = pForm;
+            InitCombox();
+        }
+
+        private void InitCombox()
+        {
+            int[] hour = new int[24];
+            int[] minute = new int[60];
+            for (int i=0;i<hour.Length;i++)
+            {
+                hour[i] = i;
+            }
+            cbo_hour.DataSource = hour;
+            for (int i = 0; i < minute.Length; i++)
+            {
+                minute[i] = i;
+            }
+            cbo_minute.DataSource = minute;
         }
 
         private void AddClockSave_btn_Click(object sender, EventArgs e)
         {
-            string time = AddClockTime_txt.Text;
-            if (!TimeService.IsGlobalClockTime(time))
+            string time = cbo_hour.SelectedItem.ToString() + ":" + cbo_minute.SelectedItem.ToString();
+            GlobalClockTime gct = new GlobalClockTime();
+            gct.Time = time;
+            gct.Note = AddClockTipText_txt.Text;
+            foreach (GlobalClockTime g in pForm.globalClock.TimeList)
             {
-                MessageBox.Show("时间格式不正确，例子： 05:20表示上午五点二十");
-            }else
-            {
-                GlobalClockTime gct = new GlobalClockTime();
-                gct.Time = time;
-                gct.Note = AddClockTipText_txt.Text;
-                foreach (GlobalClockTime g in pForm.globalClock.TimeList)
+                if (g.Time == gct.Time)
                 {
-                    if (g.Time==gct.Time)
-                    {
-                        MessageBox.Show("已经有一个相同的时间了，请修改!");
-                        return;
-                    }
+                    MessageBox.Show("已经有一个相同的时间了，请修改!");
+                    return;
                 }
-                pForm.globalClock.TimeList.Add(gct);
-                pForm.ReloadData();
-                this.Close();
             }
+            pForm.globalClock.TimeList.Add(gct);
+            pForm.ReloadData();
+            this.Close();
         }
     }
 }

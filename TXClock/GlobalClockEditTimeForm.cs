@@ -73,11 +73,24 @@ namespace TXClock
         private void GlobalClockEdit_grv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            if (e.ColumnIndex == 2 && rowIndex!=-1)
+            if (rowIndex != -1)
             {
-                globalClock.TimeList.RemoveAt(rowIndex);
-                GlobalClockEdit_grv.Rows.RemoveAt(rowIndex);
+                if (e.ColumnIndex == 2)
+                {
+                    globalClock.TimeList.RemoveAt(rowIndex);
+                    GlobalClockEdit_grv.Rows.RemoveAt(rowIndex);
+                }
+                if (e.ColumnIndex == 0)
+                {
+                    EditTimeInRow(GlobalClockEdit_grv.Rows[rowIndex]);
+                }
             }
+        }
+
+        private void EditTimeInRow(DataGridViewRow row)
+        {
+            GlobalClockEditTimeInRowForm editForm = new GlobalClockEditTimeInRowForm(row);
+            editForm.ShowDialog();
         }
 
         private void GlobalClockEditAdd_btn_Click(object sender, EventArgs e)

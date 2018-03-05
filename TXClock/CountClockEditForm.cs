@@ -103,7 +103,17 @@ namespace TXClock
                 {
                     grv_countClock.Rows.RemoveAt(rowIndex);
                 }
+                if (grv_countClock.Columns[e.ColumnIndex].Name == "cell_allTime")
+                {
+                    EditTimeInRow(grv_countClock.Rows[rowIndex]);
+                }
             }
+        }
+
+        private void EditTimeInRow(DataGridViewRow row)
+        {
+            CountClockEditTimeForm editForm = new CountClockEditTimeForm(row);
+            editForm.ShowDialog();
         }
     }
 }
