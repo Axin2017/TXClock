@@ -69,6 +69,7 @@
             this.ClientSize = new System.Drawing.Size(193, 150);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_ok);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DialogTip";

@@ -330,7 +330,7 @@ namespace TXClock
             XmlDocument configXml = XmlService.ConfigXml;
             if (TXDLL.Tools.XmlTools.GetInnerTextByUniqueTagName(configXml, "IsMessage") == "1")
             {
-                ShowBalloonTip(tag, note, 2000);
+                ShowBalloonTip(tag, note, 20000);
             }
             else if (TXDLL.Tools.XmlTools.GetInnerTextByUniqueTagName(configXml, "IsDialog") == "1")
             {

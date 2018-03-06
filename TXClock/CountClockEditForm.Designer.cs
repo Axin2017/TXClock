@@ -34,11 +34,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grv_countClock = new System.Windows.Forms.DataGridView();
-            this.btn_save = new System.Windows.Forms.Button();
             this.cell_tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cell_allTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cell_note = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cell_delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btn_save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grv_countClock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,16 +76,6 @@
             this.grv_countClock.TabIndex = 1;
             this.grv_countClock.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_countClock_CellClick);
             // 
-            // btn_save
-            // 
-            this.btn_save.Location = new System.Drawing.Point(247, 227);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(75, 23);
-            this.btn_save.TabIndex = 2;
-            this.btn_save.Text = "保存";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
-            // 
             // cell_tag
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -119,6 +109,16 @@
             this.cell_delete.Name = "cell_delete";
             this.cell_delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(247, 227);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(75, 23);
+            this.btn_save.TabIndex = 2;
+            this.btn_save.Text = "保存";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
             // CountClockEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -126,6 +126,7 @@
             this.ClientSize = new System.Drawing.Size(342, 262);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.grv_countClock);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CountClockEditForm";

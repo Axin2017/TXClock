@@ -38,7 +38,7 @@
   </Clock>
   <Clock tag="恶魔" type="1">
     <Times>
-      <Time tag="" enable="1">13:57</Time>
+      <Time tag="" enable="0">13:57</Time>
     </Times>
     <Weeks>
       <Week>1</Week>

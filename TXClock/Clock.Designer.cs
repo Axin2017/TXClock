@@ -31,6 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clock));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,12 +48,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Clock_tbc = new System.Windows.Forms.TabControl();
             this.GlobalClock_tbp = new System.Windows.Forms.TabPage();
             this.GlobalClock_gpb = new System.Windows.Forms.GroupBox();
@@ -56,6 +56,12 @@
             this.btn_editGlobalClock = new System.Windows.Forms.Button();
             this.btn_addGlobalClock = new System.Windows.Forms.Button();
             this.ClockGlobalGrd_grd = new System.Windows.Forms.DataGridView();
+            this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leftTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clockType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountClock_tbp = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lb_timeNow1 = new System.Windows.Forms.Label();
@@ -86,12 +92,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbk_startWithWds = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.leftTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clockType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Clock_tbc.SuspendLayout();
             this.GlobalClock_tbp.SuspendLayout();
             this.GlobalClock_gpb.SuspendLayout();
@@ -214,6 +215,62 @@
             this.ClockGlobalGrd_grd.Size = new System.Drawing.Size(309, 322);
             this.ClockGlobalGrd_grd.TabIndex = 2;
             this.ClockGlobalGrd_grd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClockGlobalGrd_grd_CellClick);
+            // 
+            // tag
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.tag.DefaultCellStyle = dataGridViewCellStyle2;
+            this.tag.HeaderText = "标签";
+            this.tag.Name = "tag";
+            this.tag.ReadOnly = true;
+            this.tag.Width = 55;
+            // 
+            // time
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.time.DefaultCellStyle = dataGridViewCellStyle3;
+            this.time.HeaderText = "时间";
+            this.time.Name = "time";
+            this.time.ReadOnly = true;
+            this.time.Width = 55;
+            // 
+            // leftTime
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.leftTime.DefaultCellStyle = dataGridViewCellStyle4;
+            this.leftTime.HeaderText = "剩余时间";
+            this.leftTime.Name = "leftTime";
+            this.leftTime.ReadOnly = true;
+            this.leftTime.Width = 80;
+            // 
+            // enable
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.enable.DefaultCellStyle = dataGridViewCellStyle5;
+            this.enable.HeaderText = "启用(点击切换)";
+            this.enable.Name = "enable";
+            this.enable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.enable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clockType
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clockType.DefaultCellStyle = dataGridViewCellStyle6;
+            this.clockType.HeaderText = "类型";
+            this.clockType.Name = "clockType";
+            this.clockType.ReadOnly = true;
+            this.clockType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clockType.Width = 55;
+            // 
+            // note
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.note.DefaultCellStyle = dataGridViewCellStyle7;
+            this.note.HeaderText = "注释";
+            this.note.Name = "note";
+            this.note.ReadOnly = true;
+            this.note.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.note.Width = 70;
             // 
             // CountClock_tbp
             // 
@@ -556,62 +613,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // tag
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.tag.DefaultCellStyle = dataGridViewCellStyle2;
-            this.tag.HeaderText = "标签";
-            this.tag.Name = "tag";
-            this.tag.ReadOnly = true;
-            this.tag.Width = 55;
-            // 
-            // time
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.time.DefaultCellStyle = dataGridViewCellStyle3;
-            this.time.HeaderText = "时间";
-            this.time.Name = "time";
-            this.time.ReadOnly = true;
-            this.time.Width = 55;
-            // 
-            // leftTime
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.leftTime.DefaultCellStyle = dataGridViewCellStyle4;
-            this.leftTime.HeaderText = "剩余时间";
-            this.leftTime.Name = "leftTime";
-            this.leftTime.ReadOnly = true;
-            this.leftTime.Width = 80;
-            // 
-            // enable
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.enable.DefaultCellStyle = dataGridViewCellStyle5;
-            this.enable.HeaderText = "启用(点击切换)";
-            this.enable.Name = "enable";
-            this.enable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.enable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clockType
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.clockType.DefaultCellStyle = dataGridViewCellStyle6;
-            this.clockType.HeaderText = "类型";
-            this.clockType.Name = "clockType";
-            this.clockType.ReadOnly = true;
-            this.clockType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clockType.Width = 55;
-            // 
-            // note
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.note.DefaultCellStyle = dataGridViewCellStyle7;
-            this.note.HeaderText = "注释";
-            this.note.Name = "note";
-            this.note.ReadOnly = true;
-            this.note.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.note.Width = 70;
-            // 
             // Clock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -693,6 +694,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn enable;
         private System.Windows.Forms.DataGridViewTextBoxColumn clockType;
         private System.Windows.Forms.DataGridViewTextBoxColumn note;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

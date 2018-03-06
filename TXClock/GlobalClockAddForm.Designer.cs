@@ -35,6 +35,9 @@
             this.GlobalClockAddAdd_btn = new System.Windows.Forms.Button();
             this.GlobalClockAddSave_btn = new System.Windows.Forms.Button();
             this.GlobalClockAdd_grv = new System.Windows.Forms.DataGridView();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.GlobalClockAddTag_txt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,9 +52,6 @@
             this.GlobalClockAddAdd_cb1 = new System.Windows.Forms.CheckBox();
             this.GlobalClockAddAdd_cb0 = new System.Windows.Forms.CheckBox();
             this.GlobalClockAddAdd_rb3 = new System.Windows.Forms.RadioButton();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalClockAdd_grv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +99,30 @@
             this.GlobalClockAdd_grv.Size = new System.Drawing.Size(293, 170);
             this.GlobalClockAdd_grv.TabIndex = 9;
             this.GlobalClockAdd_grv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GlobalClockAdd_grv_CellClick);
+            // 
+            // time
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.time.DefaultCellStyle = dataGridViewCellStyle2;
+            this.time.HeaderText = "时间";
+            this.time.Name = "time";
+            this.time.ReadOnly = true;
+            // 
+            // tag
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.tag.DefaultCellStyle = dataGridViewCellStyle3;
+            this.tag.HeaderText = "提示信息";
+            this.tag.Name = "tag";
+            // 
+            // delete
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.delete.DefaultCellStyle = dataGridViewCellStyle4;
+            this.delete.HeaderText = "删除";
+            this.delete.Name = "delete";
+            this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.delete.Width = 90;
             // 
             // label2
             // 
@@ -244,30 +268,6 @@
             this.GlobalClockAddAdd_rb3.Text = "一次性";
             this.GlobalClockAddAdd_rb3.UseVisualStyleBackColor = true;
             // 
-            // time
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.time.DefaultCellStyle = dataGridViewCellStyle2;
-            this.time.HeaderText = "时间";
-            this.time.Name = "time";
-            this.time.ReadOnly = true;
-            // 
-            // tag
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.tag.DefaultCellStyle = dataGridViewCellStyle3;
-            this.tag.HeaderText = "提示信息";
-            this.tag.Name = "tag";
-            // 
-            // delete
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.delete.DefaultCellStyle = dataGridViewCellStyle4;
-            this.delete.HeaderText = "删除";
-            this.delete.Name = "delete";
-            this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.delete.Width = 90;
-            // 
             // GlobalClockAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -283,6 +283,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.GlobalClockAddTag_txt);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GlobalClockAddForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "添加闹钟";

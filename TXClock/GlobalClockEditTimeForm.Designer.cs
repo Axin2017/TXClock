@@ -48,10 +48,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.GlobalClockEditSave_btn = new System.Windows.Forms.Button();
             this.GlobalClockEdit_grv = new System.Windows.Forms.DataGridView();
-            this.GlobalClockEditAdd_btn = new System.Windows.Forms.Button();
             this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GlobalClockEditAdd_btn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GlobalClockEdit_grv)).BeginInit();
             this.SuspendLayout();
@@ -233,16 +233,6 @@
             this.GlobalClockEdit_grv.TabIndex = 19;
             this.GlobalClockEdit_grv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GlobalClockEdit_grv_CellClick);
             // 
-            // GlobalClockEditAdd_btn
-            // 
-            this.GlobalClockEditAdd_btn.Location = new System.Drawing.Point(211, 57);
-            this.GlobalClockEditAdd_btn.Name = "GlobalClockEditAdd_btn";
-            this.GlobalClockEditAdd_btn.Size = new System.Drawing.Size(75, 23);
-            this.GlobalClockEditAdd_btn.TabIndex = 21;
-            this.GlobalClockEditAdd_btn.Text = "添加";
-            this.GlobalClockEditAdd_btn.UseVisualStyleBackColor = true;
-            this.GlobalClockEditAdd_btn.Click += new System.EventHandler(this.GlobalClockEditAdd_btn_Click);
-            // 
             // time
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -268,6 +258,16 @@
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.delete.Width = 90;
             // 
+            // GlobalClockEditAdd_btn
+            // 
+            this.GlobalClockEditAdd_btn.Location = new System.Drawing.Point(211, 57);
+            this.GlobalClockEditAdd_btn.Name = "GlobalClockEditAdd_btn";
+            this.GlobalClockEditAdd_btn.Size = new System.Drawing.Size(75, 23);
+            this.GlobalClockEditAdd_btn.TabIndex = 21;
+            this.GlobalClockEditAdd_btn.Text = "添加";
+            this.GlobalClockEditAdd_btn.UseVisualStyleBackColor = true;
+            this.GlobalClockEditAdd_btn.Click += new System.EventHandler(this.GlobalClockEditAdd_btn_Click);
+            // 
             // GlobalClockEditTimeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -283,6 +283,9 @@
             this.Controls.Add(this.GlobalClockEditSave_btn);
             this.Controls.Add(this.GlobalClockEdit_grv);
             this.Controls.Add(this.GlobalClockEditAdd_btn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GlobalClockEditTimeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "编辑闹钟";

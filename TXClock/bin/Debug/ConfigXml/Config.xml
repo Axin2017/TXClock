@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
-  <IsMessage>1</IsMessage>
-  <IsDialog>0</IsDialog>
+  <IsMessage>0</IsMessage>
+  <IsDialog>1</IsDialog>
   <IsStart>1</IsStart>
 </Config>
