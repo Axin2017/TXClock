@@ -57,15 +57,15 @@ namespace TXClock.Service
             CountClockXml = TXDLL.Tools.XmlTools.GetXmlByPath(ParamsConfig.CountClockXmlPath);
             ConfigXml = TXDLL.Tools.XmlTools.GetXmlByPath(ParamsConfig.ConfigXmlPath);
         }
-        private static void ReloadGlobalClockXml()
+        public static void ReloadGlobalClockXml()
         {
             GlobalClockXml = TXDLL.Tools.XmlTools.GetXmlByPath(ParamsConfig.GlobalClockXmlPath);
         }
-        private static void ReloadCountClockXml()
+        public static void ReloadCountClockXml()
         {
             CountClockXml = TXDLL.Tools.XmlTools.GetXmlByPath(ParamsConfig.CountClockXmlPath);
         }
-        private static void ReloadConfigXml()
+        public static void ReloadConfigXml()
         {
             ConfigXml = TXDLL.Tools.XmlTools.GetXmlByPath(ParamsConfig.ConfigXmlPath);
         }

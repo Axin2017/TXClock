@@ -503,6 +503,7 @@ namespace TXClock
                 TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsStart", "0");
                 TXDLL.Tools.SystemTools.CancelProgramAutoRun(ParamsConfig.ApplicationKey);
             }
+            XmlService.ReloadConfigXml();
         }
 
         private void rbt_message_CheckedChanged(object sender, EventArgs e)
@@ -515,6 +516,7 @@ namespace TXClock
             {
                 TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsMessage", "0");
             }
+            XmlService.ReloadConfigXml();
         }
 
         private void rbt_dialog_CheckedChanged(object sender, EventArgs e)
@@ -527,6 +529,7 @@ namespace TXClock
             {
                 TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsDialog", "0");
             }
+            XmlService.ReloadConfigXml();
         }
         #endregion
     }
