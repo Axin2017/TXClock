@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using TXClock.Enums;
 using TXClock.Model;
+using TXClock.Service;
 
 namespace TXClock
 {
@@ -122,8 +116,7 @@ namespace TXClock
                     MessageBox.Show("自定义模式必须选择星期!");
                     return;
                 }
-                XmlDocument doc = GetGlobalClockXml();
-                globalClock.SaveToXmlNode(doc);
+                globalClock.SaveToXmlNode();
                 clock.ReLoadGlobalClock();
                 this.Close();
             }
@@ -132,8 +125,7 @@ namespace TXClock
         private bool CheckTagExists(string tag)
         {
             bool exists = false;
-            XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
-            XmlNodeList clockNodeList = globalXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == tag)
@@ -143,11 +135,6 @@ namespace TXClock
                 }
             }
             return exists;
-        }
-
-        private XmlDocument GetGlobalClockXml()
-        {
-            return TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
         }
 
         private void GlobalClockAddAdd_rb1_CheckedChanged(object sender, EventArgs e)

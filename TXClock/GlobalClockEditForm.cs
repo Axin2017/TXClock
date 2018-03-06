@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using TXClock.Model;
+using TXClock.Service;
 
 namespace TXClock
 {
@@ -23,8 +18,7 @@ namespace TXClock
         }
         public void LoadGlobalClock()
         {
-            XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
-            XmlNodeList clockNodeList = globalXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
             List<GlobalClock> globalClockList = new List<GlobalClock>();
             foreach (XmlNode clockNode in clockNodeList)
             {
@@ -70,10 +64,9 @@ namespace TXClock
         {
             if (MessageBox.Show("确认删除" + tag + "吗", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
                 GlobalClock globalClock = new GlobalClock();
                 globalClock.Tag = tag;
-                globalClock.DeleteFromXmlNode(globalXml);
+                globalClock.DeleteFromXmlNode();
                 MessageBox.Show("删除成功!");
                 ReLoadGlobalClock();
             }
@@ -81,8 +74,7 @@ namespace TXClock
 
         private void EditClock(string tag)
         {
-            XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
-            XmlNodeList clockNodeList = globalXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == tag)

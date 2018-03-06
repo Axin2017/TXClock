@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using TXClock.Model;
@@ -28,8 +22,7 @@ namespace TXClock
 
         private void LoadCountClock()
         {
-            XmlDocument countXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath);
-            XmlNodeList clockNodeList = countXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.CountClockXml.GetElementsByTagName("Clock");
             foreach (XmlNode clockNode in clockNodeList)
             {
                 CountClock countClock = new CountClock();
@@ -61,37 +54,20 @@ namespace TXClock
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            bool valid= true;
+            //先删除再添加
+            XmlNode countClock = XmlService.CountClockXml.SelectSingleNode("CountClock");
+            countClock.RemoveAll();
+            XmlService.SaveCountClockXml();
             foreach (DataGridViewRow row in grv_countClock.Rows)
             {
-                if (!TimeService.IsCountClockTime(row.Cells["cell_allTime"].Value.ToString()))
-                {
-                    valid = false;
-                    break;
-                }
+                CountClock cc = new CountClock();
+                cc.Tag = row.Cells["cell_tag"].Value.ToString();
+                cc.Time = row.Cells["cell_allTime"].Value.ToString();
+                cc.Note = row.Cells["cell_note"].Value.ToString();
+                cc.SaveToXmlNode();
             }
-            if (!valid)
-            {
-                MessageBox.Show("时间格式不正确，例子： 00:05:20表示0小时5分20秒,目前只能最多到小时");
-            }else
-            {
-                XmlDocument countXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath);
-                //先删除再添加
-                XmlNode countClock = countXml.SelectSingleNode("CountClock");
-                countClock.RemoveAll();
-                countXml.Save(GlobalParamsConfig.CountClockXmlPath);
-                foreach (DataGridViewRow row in grv_countClock.Rows)
-                {
-                    CountClock cc = new CountClock();
-                    cc.Tag = row.Cells["cell_tag"].Value.ToString();
-                    cc.Time= row.Cells["cell_allTime"].Value.ToString();
-                    cc.Note= row.Cells["cell_note"].Value.ToString();
-                    cc.SaveToXmlNode(countXml);
-                }
-
-                clock.ReloadCountClockGrid();
-                this.Close();
-            }
+            clock.ReloadCountClockGrid();
+            this.Close();
         }
 
         private void grv_countClock_CellClick(object sender, DataGridViewCellEventArgs e)

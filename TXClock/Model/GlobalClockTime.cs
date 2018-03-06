@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using TXClock.Enums;
+using TXClock.Service;
 
 namespace TXClock.Model
 {
@@ -48,8 +45,7 @@ namespace TXClock.Model
         }
         public void UpdateState(bool enable)
         {
-            XmlDocument doc = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
-            XmlNodeList clockNodeList = doc.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == ParantTag)
@@ -60,7 +56,7 @@ namespace TXClock.Model
                         if (timeList[j].InnerText==Time)
                         {
                             timeList[j].Attributes["enable"].Value = (enable ? "1" : "0");
-                            doc.Save(GlobalParamsConfig.GlobalClockXmlPath);
+                            XmlService.SaveGlobalClockXml();
                             break;
                         }
                     }
@@ -70,8 +66,7 @@ namespace TXClock.Model
         }
         public void DeleteOnceTime()
         {
-            XmlDocument doc = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
-            XmlNodeList clockNodeList = doc.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == ParantTag)
@@ -82,7 +77,7 @@ namespace TXClock.Model
                         if (timeList[j].InnerText == Time)
                         {
                             timeList[j].ParentNode.RemoveChild(timeList[j]);
-                            doc.Save(GlobalParamsConfig.GlobalClockXmlPath);
+                            XmlService.SaveGlobalClockXml();
                             break;
                         }
                     }
@@ -93,7 +88,7 @@ namespace TXClock.Model
                         if (leftTimeList == null || leftTimeList.Count == 0)
                         {
                             clockNodeList[i].ParentNode.RemoveChild(clockNodeList[i]);
-                            doc.Save(GlobalParamsConfig.GlobalClockXmlPath);
+                            XmlService.SaveGlobalClockXml();
                         }
                     }
                     break;

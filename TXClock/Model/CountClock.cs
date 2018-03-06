@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Xml;
 using TXClock.Interface;
+using TXClock.Service;
 
 namespace TXClock.Model
 {
@@ -13,21 +9,28 @@ namespace TXClock.Model
         public string Tag { get; set; }
         public string Time { get; set; }
         public string Note { get; set; }
-
-        public void SaveToXmlNode(XmlDocument doc)
+        private XmlDocument XmlDoc
         {
-            XmlElement clock = doc.CreateElement("Clock");
+            get
+            {
+                return XmlService.CountClockXml;
+            }
+        }
+
+        public void SaveToXmlNode()
+        {
+            XmlElement clock = XmlDoc.CreateElement("Clock");
             clock.SetAttribute("tag", Tag);
             clock.SetAttribute("note", Note);
             clock.InnerText = Time;
-            XmlNode countClock = doc.SelectSingleNode("CountClock");
+            XmlNode countClock = XmlDoc.SelectSingleNode("CountClock");
             countClock.AppendChild(clock);
-            doc.Save(GlobalParamsConfig.CountClockXmlPath);
+            XmlService.SaveCountClockXml();
         }
 
-        public void DeleteFromXmlNode(XmlDocument doc)
+        public void DeleteFromXmlNode()
         {
-            XmlNodeList clockNodeList = doc.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlDoc.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == Tag)
@@ -36,7 +39,7 @@ namespace TXClock.Model
                     break;
                 }
             }
-            doc.Save(GlobalParamsConfig.CountClockXmlPath);
+            XmlService.SaveCountClockXml();
         }
 
         public void InitFromXmlNode(XmlNode node)
@@ -47,15 +50,14 @@ namespace TXClock.Model
         }
         public void UpdateClock()
         {
-            XmlDocument doc = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath);
-            XmlNodeList clockNodeList = doc.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlDoc.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == Tag)
                 {
                     clockNodeList[i].Attributes["time"].Value = Time;
                     clockNodeList[i].Attributes["note"].Value = Note;
-                    doc.Save(GlobalParamsConfig.CountClockXmlPath);
+                    XmlService.SaveCountClockXml();
                     break;
                 }
             }

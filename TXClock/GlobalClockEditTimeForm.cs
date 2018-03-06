@@ -107,7 +107,6 @@ namespace TXClock
             }
             else
             {
-                XmlDocument doc = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
                 GlobalClock newClock = new GlobalClock();
                 newClock.Tag = GlobalClockEditTag_txt.Text;
                 foreach (DataGridViewRow dr in GlobalClockEdit_grv.Rows)
@@ -143,8 +142,8 @@ namespace TXClock
                     MessageBox.Show("自定义模式必须选择星期!");
                     return;
                 }
-                globalClock.DeleteFromXmlNode(doc);
-                newClock.SaveToXmlNode(doc);
+                globalClock.DeleteFromXmlNode();
+                newClock.SaveToXmlNode();
                 editForm.ReLoadGlobalClock();
                 this.Close();
             }
@@ -152,7 +151,7 @@ namespace TXClock
         private bool CheckTagExists(string tag)
         {
             bool exists = false;
-            XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
+            XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(ParamsConfig.GlobalClockXmlPath);
             XmlNodeList clockNodeList = globalXml.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {

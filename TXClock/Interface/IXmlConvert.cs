@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Xml;
 
 namespace TXClock.Interface
 {
     public interface IXmlConvert
     {
-        void SaveToXmlNode(XmlDocument  doc);
-        void DeleteFromXmlNode(XmlDocument doc);
+        void SaveToXmlNode();
+        void DeleteFromXmlNode();
         void InitFromXmlNode(XmlNode node);
     }
 }

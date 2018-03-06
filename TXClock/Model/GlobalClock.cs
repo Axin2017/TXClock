@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using TXClock.Enums;
 using TXClock.Interface;
@@ -13,6 +10,13 @@ namespace TXClock.Model
     public class GlobalClock:IXmlConvert
     {
         public string Tag { get; set; }
+        private XmlDocument XmlDoc
+        {
+            get
+            {
+                return XmlService.GlobalClockXml;
+            }
+        }
         private List<GlobalClockTime> timeList;
         public List<GlobalClockTime> TimeList
         {
@@ -46,9 +50,9 @@ namespace TXClock.Model
 
         
 
-        public void DeleteFromXmlNode(XmlDocument doc)
+        public void DeleteFromXmlNode()
         {
-            XmlNodeList clockNodeList = doc.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlDoc.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == Tag)
@@ -57,36 +61,36 @@ namespace TXClock.Model
                     break;
                 }
             }
-            doc.Save(GlobalParamsConfig.GlobalClockXmlPath);
+            XmlService.SaveGlobalClockXml();
         }
 
-        public void SaveToXmlNode(XmlDocument doc)
+        public void SaveToXmlNode()
         {
-            XmlElement clock = doc.CreateElement("Clock");
+            XmlElement clock = XmlDoc.CreateElement("Clock");
             clock.SetAttribute("tag", Tag);
             clock.SetAttribute("type", ((int)ClockType).ToString());
             
-            XmlNode globalClock = doc.SelectSingleNode("/GlobalClock");
+            XmlNode globalClock = XmlDoc.SelectSingleNode("/GlobalClock");
             globalClock.AppendChild(clock);
-            XmlElement times = doc.CreateElement("Times");
+            XmlElement times = XmlDoc.CreateElement("Times");
             clock.AppendChild(times);
             foreach (GlobalClockTime gct in TimeList)
             {
-                XmlElement time = doc.CreateElement("Time");
+                XmlElement time = XmlDoc.CreateElement("Time");
                 time.InnerText = gct.Time;
                 time.SetAttribute("tag", gct.Note);
                 time.SetAttribute("enable", gct.Enable ? "1" : "0");
                 times.AppendChild(time);
             }
-            XmlElement weeks = doc.CreateElement("Weeks");
+            XmlElement weeks = XmlDoc.CreateElement("Weeks");
             clock.AppendChild(weeks);
             foreach (WeekType weekType in WeekList)
             {
-                XmlElement week = doc.CreateElement("Week");
+                XmlElement week = XmlDoc.CreateElement("Week");
                 week.InnerText = ((int)weekType).ToString();
                 weeks.AppendChild(week);
             }
-            doc.Save(GlobalParamsConfig.GlobalClockXmlPath);
+            XmlService.SaveGlobalClockXml();
         }
 
         public void InitFromXmlNode(XmlNode node)
@@ -116,7 +120,7 @@ namespace TXClock.Model
                     gct.Enable = timeNode.Attributes["enable"].Value.ToString() == "1";
                     if (gct.Enable)
                     {
-                        gct.LeftTime = TimeService.GetLeftTime(gct.Time, ClockType, WeekList);
+                        gct.LeftTime = TimeService.GetGlobalClockLeftTime(gct.Time, ClockType, WeekList);
                     }
                     gct.ParentClock = this;
                     TimeList.Add(gct);

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TXClock
 {
-    public static class GlobalParamsConfig
+    public static class ParamsConfig
     {
         public static string XmlConfigFolderPath
         {

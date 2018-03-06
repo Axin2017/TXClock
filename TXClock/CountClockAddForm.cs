@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using TXClock.Model;
@@ -64,7 +57,7 @@ namespace TXClock
                 cc.Tag = tag;
                 cc.Time = time;
                 cc.Note = note;
-                cc.SaveToXmlNode(TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath));
+                cc.SaveToXmlNode();
                 clock.ReloadCountClockGrid();
             }
             this.Close();
@@ -72,8 +65,7 @@ namespace TXClock
         private bool CheckTagExists(string tag)
         {
             bool exists = false;
-            XmlDocument countXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath);
-            XmlNodeList clockNodeList = countXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.CountClockXml.GetElementsByTagName("Clock");
             for (int i = 0; i < clockNodeList.Count; i++)
             {
                 if (clockNodeList[i].Attributes["tag"].Value.ToString() == tag)

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 using System.Xml;
 using TXClock.Enums;
-using TXClock.Interface;
 using TXClock.Model;
 using TXClock.Service;
 using TXDLL.Winform.Control;
@@ -30,14 +28,16 @@ namespace TXClock
             SetTrayInfoAndIcon();
             try
             {
-                CheckConfigXml();
-            }catch(Exception ex)
+                XmlService.CheckXml();
+                XmlService.InitXml();
+            }
+            catch(Exception ex)
             {
-                MessageBox.Show("创建配置文件失败!"+ex.Message);
+                MessageBox.Show("初始化配置文件失败!"+ex.Message);
             }
             try
             {
-                GlobalParamsConfig.Now = DateTime.Now;
+                ParamsConfig.Now = DateTime.Now;
                 SetTime();
                 #region 闹钟初始化
                 globalClockTimeList = new List<GlobalClockTime>();
@@ -58,12 +58,17 @@ namespace TXClock
             }
             timer1.Start();
         }
+        /// <summary>
+        /// 设置界面额的时间
+        /// </summary>
         private void SetTime()
         {
-            lb_timeNow.Text =  GlobalParamsConfig.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            lb_timeNow1.Text= GlobalParamsConfig.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            lb_timeNow.Text =  ParamsConfig.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            lb_timeNow1.Text= ParamsConfig.Now.ToString("yyyy/MM/dd HH:mm:ss");
         }
-        // 设置托盘图标程序信息和程序的图标
+        /// <summary>
+        /// 设置托盘图标程序信息和程序的图标
+        /// </summary>
         private void SetTrayInfoAndIcon()
         {
             TXTrayAttribute trayAttr = new TXTrayAttribute();
@@ -75,10 +80,12 @@ namespace TXClock
             trayAttr.Icon = (Icon)rm.GetObject("TXNotifyIcon.Icon");
             SetTrayAttribute(trayAttr);
         }
-
+        /// <summary>
+        /// 加载设置
+        /// </summary>
         private void LoadSetting()
         {
-            XmlDocument configXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.ConfigXmlPath);
+            XmlDocument configXml = XmlService.ConfigXml;
             string isStartWithWindows = TXDLL.Tools.XmlTools.GetInnerTextByUniqueTagName(configXml, "IsStart");
             string isMessage = TXDLL.Tools.XmlTools.GetInnerTextByUniqueTagName(configXml, "IsMessage");
             string isDialog = TXDLL.Tools.XmlTools.GetInnerTextByUniqueTagName(configXml, "IsDialog");
@@ -99,8 +106,7 @@ namespace TXClock
         #region 加载闹钟
         private void LoadGlobalClock()
         {
-            XmlDocument globalXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.GlobalClockXmlPath);
-            XmlNodeList clockNodeList = globalXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
             List<GlobalClockTime> enableGlobalClockTimeList = new List<GlobalClockTime>();
             List<GlobalClockTime> disenableGlobalClockTimeList = new List<GlobalClockTime>();
             foreach (XmlNode clockNode in clockNodeList)
@@ -139,16 +145,16 @@ namespace TXClock
                 DataGridViewTextBoxCell leftTime = new DataGridViewTextBoxCell();
                 leftTime.Value = gct.Enable? gct.LeftTime.ToString().Replace(".", "天 "):"未启用";
                 row.Cells.Add(leftTime);
-                DataGridViewTextBoxCell note = new DataGridViewTextBoxCell();
-                note.Value = gct.Note;
-                row.Cells.Add(note);
+                DataGridViewTextBoxCell enable = new DataGridViewTextBoxCell();
+                enable.Value = gct.Enable ? "是" : "否";
+                enable.ReadOnly = false;
+                row.Cells.Add(enable);
                 DataGridViewTextBoxCell clockType = new DataGridViewTextBoxCell();
                 clockType.Value = GlobalClockTypeToChinese(gct.ParentClock.ClockType);
                 row.Cells.Add(clockType);
-                DataGridViewTextBoxCell enable = new DataGridViewTextBoxCell();
-                enable.Value = gct.Enable?"是":"否";
-                enable.ReadOnly = false;
-                row.Cells.Add(enable);
+                DataGridViewTextBoxCell note = new DataGridViewTextBoxCell();
+                note.Value = gct.Note;
+                row.Cells.Add(note);
                 if (!gct.Enable)
                 {
                     row.DefaultCellStyle.BackColor= Color.LightGray;
@@ -199,51 +205,7 @@ namespace TXClock
             return gct;
         }
         #endregion
-        #region 检测配置文件完整性
-        private void CheckConfigXml()
-        {
-            if (!Directory.Exists(GlobalParamsConfig.XmlConfigFolderPath))
-            {
-                Directory.CreateDirectory(GlobalParamsConfig.XmlConfigFolderPath);
-            }
-            if (!File.Exists(GlobalParamsConfig.GlobalClockXmlPath))
-            {
-                XmlDocument xmldoc = new XmlDocument();
-                XmlDeclaration xmldecl = xmldoc.CreateXmlDeclaration("1.0", "utf-8", null);
-                xmldoc.AppendChild(xmldecl);
-                XmlElement GlobalClock = xmldoc.CreateElement("GlobalClock");
-                xmldoc.AppendChild(GlobalClock);
-                xmldoc.Save(GlobalParamsConfig.GlobalClockXmlPath);
-            }
-            if (!File.Exists(GlobalParamsConfig.ConfigXmlPath))
-            {
-                XmlDocument xmldoc = new XmlDocument();
-                XmlDeclaration xmldecl = xmldoc.CreateXmlDeclaration("1.0", "utf-8", null);
-                xmldoc.AppendChild(xmldecl);
-                XmlElement Config = xmldoc.CreateElement("Config");
-                xmldoc.AppendChild(Config);
-                XmlElement IsMessage = xmldoc.CreateElement("IsMessage");
-                IsMessage.InnerText = "1";
-                Config.AppendChild(IsMessage);
-                XmlElement IsDialog = xmldoc.CreateElement("IsDialog");
-                IsDialog.InnerText = "0";
-                Config.AppendChild(IsDialog);
-                XmlElement IsStart = xmldoc.CreateElement("IsStart");
-                IsStart.InnerText = "0";
-                Config.AppendChild(IsStart);
-                xmldoc.Save(GlobalParamsConfig.ConfigXmlPath);
-            }
-            if (!File.Exists(GlobalParamsConfig.CountClockXmlPath))
-            {
-                XmlDocument xmldoc = new XmlDocument();
-                XmlDeclaration xmldecl = xmldoc.CreateXmlDeclaration("1.0", "utf-8", null);
-                xmldoc.AppendChild(xmldecl);
-                XmlElement CountClock = xmldoc.CreateElement("CountClock");
-                xmldoc.AppendChild(CountClock);
-                xmldoc.Save(GlobalParamsConfig.CountClockXmlPath);
-            }
-        }
-        #endregion
+        
         //启用或者禁用
         private void ClockGlobalGrd_grd_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -262,7 +224,7 @@ namespace TXClock
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            GlobalParamsConfig.Now = DateTime.Now;
+            ParamsConfig.Now = DateTime.Now;
             SetTime();
             try
             {
@@ -301,7 +263,7 @@ namespace TXClock
                     }
                     else
                     {
-                        TimeSpan newTimeSpan = TimeService.GetLeftTime(time, nowGct.ClockType, nowGct.WeekList);
+                        TimeSpan newTimeSpan = TimeService.GetGlobalClockLeftTime(time, nowGct.ClockType, nowGct.WeekList);
                         row.Cells["leftTime"].Value = newTimeSpan.ToString().Replace(".", "天 ");
                         if (newTimeSpan <= TimeSpan.Parse("00:00:01"))
                         {
@@ -365,7 +327,7 @@ namespace TXClock
             {
                 note = tag;
             }
-            XmlDocument configXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.ConfigXmlPath);
+            XmlDocument configXml = XmlService.ConfigXml;
             if (TXDLL.Tools.XmlTools.GetInnerTextByUniqueTagName(configXml, "IsMessage") == "1")
             {
                 ShowBalloonTip(tag, note, 2000);
@@ -396,8 +358,7 @@ namespace TXClock
         #region 加载常用倒计时
         private void LoadCountClock()
         {
-            XmlDocument countXml = TXDLL.Tools.XmlTools.GetXmlByPath(GlobalParamsConfig.CountClockXmlPath);
-            XmlNodeList clockNodeList = countXml.GetElementsByTagName("Clock");
+            XmlNodeList clockNodeList = XmlService.CountClockXml.GetElementsByTagName("Clock");
             foreach (XmlNode clockNode in clockNodeList)
             {
                 CountClock countClock = new CountClock();
@@ -534,13 +495,13 @@ namespace TXClock
         {
             if (cbk_startWithWds.Checked)
             {
-                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(GlobalParamsConfig.ConfigXmlPath, "IsStart", "1");
-                TXDLL.Tools.SystemTools.SetProgramAutoRun(GlobalParamsConfig.ApplicationKey, TXDLL.Tools.PathTools.AppRootPath + @"\TXClock.exe");
+                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsStart", "1");
+                TXDLL.Tools.SystemTools.SetProgramAutoRun(ParamsConfig.ApplicationKey, TXDLL.Tools.PathTools.AppRootPath + @"TXClock.exe");
             }
             else
             {
-                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(GlobalParamsConfig.ConfigXmlPath, "IsStart", "0");
-                TXDLL.Tools.SystemTools.CancelProgramAutoRun(GlobalParamsConfig.ApplicationKey);
+                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsStart", "0");
+                TXDLL.Tools.SystemTools.CancelProgramAutoRun(ParamsConfig.ApplicationKey);
             }
         }
 
@@ -548,11 +509,11 @@ namespace TXClock
         {
             if (rbt_message.Checked)
             {
-                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(GlobalParamsConfig.ConfigXmlPath, "IsMessage", "1");
+                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsMessage", "1");
             }
             else
             {
-                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(GlobalParamsConfig.ConfigXmlPath, "IsMessage", "0");
+                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsMessage", "0");
             }
         }
 
@@ -560,11 +521,11 @@ namespace TXClock
         {
             if (rbt_dialog.Checked)
             {
-                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(GlobalParamsConfig.ConfigXmlPath, "IsDialog", "1");
+                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsDialog", "1");
             }
             else
             {
-                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(GlobalParamsConfig.ConfigXmlPath, "IsDialog", "0");
+                TXDLL.Tools.XmlTools.UpdateInnerTextByUniqueTagName(ParamsConfig.ConfigXmlPath, "IsDialog", "0");
             }
         }
         #endregion
