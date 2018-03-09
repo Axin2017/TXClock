@@ -87,13 +87,29 @@ namespace TXClock.Model
                         XmlNodeList leftTimeList = clockNodeList[i].SelectNodes("Times/Time");
                         if (leftTimeList == null || leftTimeList.Count == 0)
                         {
-                            clockNodeList[i].ParentNode.RemoveChild(clockNodeList[i]);
-                            XmlService.SaveGlobalClockXml();
+                            //为啥不直接clockNodeList[i].ParentNode.RemoveChild(clockNodeList[i])
+                            //因为在上面删除time节点后，clockNodeList[i]实际上已经修改了，直接删除删除不了
+                            DeleteOnceClock();
                         }
                     }
                     break;
                 }
             }
         }
+
+        private void DeleteOnceClock()
+        {
+            XmlNodeList clockNodeList = XmlService.GlobalClockXml.GetElementsByTagName("Clock");
+            for (int i = 0; i < clockNodeList.Count; i++)
+            {
+                if (clockNodeList[i].Attributes["tag"].Value.ToString() == ParantTag)
+                {
+                    clockNodeList[i].ParentNode.RemoveChild(clockNodeList[i]);
+                    XmlService.SaveGlobalClockXml();
+                    break;
+                }
+            }
+        }
+
     }
 }
