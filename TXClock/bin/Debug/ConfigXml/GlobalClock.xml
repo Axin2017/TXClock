@@ -48,12 +48,4 @@
       <Week>5</Week>
     </Weeks>
   </Clock>
-  <Clock tag="无锡移动端升级" type="2">
-    <Times>
-      <Time tag="今天一定要把无锡移动端的自动升级功能完成" enable="1">9:0</Time>
-    </Times>
-    <Weeks>
-      <Week>5</Week>
-    </Weeks>
-  </Clock>
 </GlobalClock>

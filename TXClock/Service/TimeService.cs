@@ -32,8 +32,8 @@ namespace TXClock.Service
                 }
                 WeekType? nextWt = null;
                 WeekType? preWt = null;
-                int x = 8;
-                int y = -8;
+                int x = 7;
+                int y = 0;
                 DayOfWeek dw = now.DayOfWeek;
                 foreach (WeekType wt in weekTypeList)
                 {
@@ -53,18 +53,7 @@ namespace TXClock.Service
                                 x = 0;
                                 break;
                             }
-                            else
-                            {
-                                nextWt = (WeekType)Enum.ToObject(typeof(WeekType), (int)dw);
-                                x = 7;
-                            }
                         }
-                        else
-                        {
-                            nextWt = (WeekType)Enum.ToObject(typeof(WeekType), (int)dw);
-                            x = 7;
-                        }
-                        
                     }
                     else if((int)wt - (int)dw > 0)//在这一周的后面
                     {
@@ -75,14 +64,14 @@ namespace TXClock.Service
                         }
                     }else if ((int)wt - (int)dw < 0)//在下一周
                     {
-                        if ((int)wt - (int)dw >y)
+                        if ((int)wt - (int)dw <y)
                         {
                             y = (int)wt - (int)dw;
                             preWt = wt;
                         }
                     }
                 }
-                if (x<8)
+                if (x<7 || preWt==null)
                 {
                     weekType = nextWt;
                 }else
