@@ -71,12 +71,15 @@ namespace TXClock.Service
                         }
                     }
                 }
-                if (x<7 || preWt==null)
+                if (x<7)
                 {
                     weekType = nextWt;
-                }else
+                }else if(y<0)
                 {
                     weekType = preWt;
+                }else
+                {
+                    weekType= (WeekType)Enum.ToObject(typeof(WeekType), (int)dw);//当一次性闹钟在当天并且在当前时间前时，会有这种情况
                 }
             }
             int daySpan = ((int)weekType - (int)now.DayOfWeek + 7) % 7;
