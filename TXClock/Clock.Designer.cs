@@ -192,6 +192,7 @@
             this.ClockGlobalGrd_grd.AllowUserToAddRows = false;
             this.ClockGlobalGrd_grd.AllowUserToDeleteRows = false;
             this.ClockGlobalGrd_grd.AllowUserToOrderColumns = true;
+            this.ClockGlobalGrd_grd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -223,7 +224,7 @@
             this.tag.HeaderText = "标签";
             this.tag.Name = "tag";
             this.tag.ReadOnly = true;
-            this.tag.Width = 55;
+            this.tag.Width = 51;
             // 
             // time
             // 
@@ -232,7 +233,7 @@
             this.time.HeaderText = "时间";
             this.time.Name = "time";
             this.time.ReadOnly = true;
-            this.time.Width = 55;
+            this.time.Width = 51;
             // 
             // leftTime
             // 
@@ -241,7 +242,7 @@
             this.leftTime.HeaderText = "剩余时间";
             this.leftTime.Name = "leftTime";
             this.leftTime.ReadOnly = true;
-            this.leftTime.Width = 80;
+            this.leftTime.Width = 51;
             // 
             // enable
             // 
@@ -251,6 +252,7 @@
             this.enable.Name = "enable";
             this.enable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.enable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.enable.Width = 37;
             // 
             // clockType
             // 
@@ -260,7 +262,7 @@
             this.clockType.Name = "clockType";
             this.clockType.ReadOnly = true;
             this.clockType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clockType.Width = 55;
+            this.clockType.Width = 32;
             // 
             // note
             // 
@@ -270,7 +272,7 @@
             this.note.Name = "note";
             this.note.ReadOnly = true;
             this.note.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.note.Width = 70;
+            this.note.Width = 32;
             // 
             // CountClock_tbp
             // 

@@ -10,20 +10,6 @@
       <Week>5</Week>
     </Weeks>
   </Clock>
-  <Clock tag="比武" type="1">
-    <Times>
-      <Time tag="第一场比武" enable="1">11:57</Time>
-      <Time tag="第三场比武" enable="1">17:27</Time>
-      <Time tag="第四场比武" enable="1">17:42</Time>
-    </Times>
-    <Weeks>
-      <Week>1</Week>
-      <Week>2</Week>
-      <Week>3</Week>
-      <Week>4</Week>
-      <Week>5</Week>
-    </Weeks>
-  </Clock>
   <Clock tag="热饭" type="1">
     <Times>
       <Time tag="热饭饭啦" enable="1">11:40</Time>
@@ -36,16 +22,10 @@
       <Week>5</Week>
     </Weeks>
   </Clock>
-  <Clock tag="恶魔" type="1">
+  <Clock tag="需求" type="2">
     <Times>
-      <Time tag="" enable="1">13:57</Time>
+      <Time tag="" enable="1">17:30</Time>
     </Times>
-    <Weeks>
-      <Week>1</Week>
-      <Week>2</Week>
-      <Week>3</Week>
-      <Week>4</Week>
-      <Week>5</Week>
-    </Weeks>
+    <Weeks />
   </Clock>
 </GlobalClock>

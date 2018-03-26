@@ -79,6 +79,7 @@
             // GlobalClockAdd_grv
             // 
             this.GlobalClockAdd_grv.AllowUserToAddRows = false;
+            this.GlobalClockAdd_grv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -122,7 +123,6 @@
             this.delete.HeaderText = "删除";
             this.delete.Name = "delete";
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.delete.Width = 90;
             // 
             // label2
             // 

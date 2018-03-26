@@ -46,6 +46,7 @@
             // 
             this.grv_countClock.AllowUserToAddRows = false;
             this.grv_countClock.AllowUserToDeleteRows = false;
+            this.grv_countClock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -83,7 +84,6 @@
             this.cell_tag.HeaderText = "标签";
             this.cell_tag.Name = "cell_tag";
             this.cell_tag.ReadOnly = true;
-            this.cell_tag.Width = 70;
             // 
             // cell_allTime
             // 
@@ -92,7 +92,6 @@
             this.cell_allTime.HeaderText = "时长";
             this.cell_allTime.Name = "cell_allTime";
             this.cell_allTime.ReadOnly = true;
-            this.cell_allTime.Width = 70;
             // 
             // cell_note
             // 
@@ -101,7 +100,6 @@
             this.cell_note.HeaderText = "注释";
             this.cell_note.Name = "cell_note";
             this.cell_note.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cell_note.Width = 60;
             // 
             // cell_delete
             // 
